@@ -1,0 +1,11 @@
+trigger CreateTaskOnAccount on Account (after insert) 
+{
+    if (Trigger.isAfter) {
+        if (Trigger.isInsert) {
+            CreateTaskOnAccountHandler.createTasks(Trigger.new);
+        }
+        if (Trigger.isUpdate) {
+            CreateTaskOnAccountHandler.activateAccounts(Trigger.new, Trigger.oldMap);
+        }
+    }
+}
